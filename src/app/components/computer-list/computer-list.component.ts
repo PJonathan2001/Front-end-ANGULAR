@@ -13,15 +13,13 @@ import { IComputer } from 'src/app/models/IComputer';
 export class ComputerListComponent implements AfterViewInit {
   computers:IComputer[] = [];
   displayedColumns: string[] = ['numerador','_id', 'procesador', 'pantalla', 'ram', 'rom', 'anio_lanzamiento', 'acciones'];
-  dataSource: MatTableDataSource<IComputer>;
+  dataSource: any = new MatTableDataSource([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private computerService: ComputerService) {
     this.getComputers();
-    this.dataSource = new MatTableDataSource(this.computers);
-
    }
 
    ngAfterViewInit() {
@@ -41,9 +39,7 @@ export class ComputerListComponent implements AfterViewInit {
     this.computerService.getComputers().subscribe(
       res => {
         this.computers = res.content;
-
-        this.dataSource = new MatTableDataSource(this.computers);
-        console.log(this.computers);
+        this.dataSource.data = this.computers;
       },
       err => console.log(err)
     );
