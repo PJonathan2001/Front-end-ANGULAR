@@ -1,0 +1,91 @@
+<!-- <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Procesador</th>
+      <th>Pantalla</th>
+      <th>ram</th>
+      <th>rom</th>
+      <th>Fecha_Lanzamiento</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let computer of computers">
+      <td>{{ computer.procesador }}</td>
+      <td>{{ computer.pantalla }}</td>
+      <td>{{ computer.ram }}</td>
+      <td>{{ computer.rom }}</td>
+      <td>{{ computer.anio_lanzamiento }}</td>
+      <td class="d-flex justify-content-evenly">
+        <a [routerLink]="['/edit',computer._id]" class="btn btn-primary" >Edit</a>
+
+        <button class="btn btn-danger" (click)="deleteComputer(computer._id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="ID" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="numerador">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
+      <td mat-cell *matCellDef="let computer"> {{computer.numerador}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="_id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let computer"> {{computer._id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="procesador">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tamanio">Procesador</th>
+      <td mat-cell *matCellDef="let computer" class="tamanio"> {{computer.procesador}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="pantalla">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tamanio"> Pantalla </th>
+      <td mat-cell *matCellDef="let computer" class="tamanio"> {{computer.pantalla}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ram">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tamanio"> Ram </th>
+      <td mat-cell *matCellDef="let computer" class="tamanio"> {{computer.ram}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rom">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tamanio"> Rom </th>
+      <td mat-cell *matCellDef="let computer" class="tamanio"> {{computer.rom}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="anio_lanzamiento">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tamanio2"> Anio de Lanzamiento </th>
+      <td mat-cell *matCellDef="let computer" class="tamanio"> {{computer.anio_lanzamiento}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tamanio"> Acciones </th>
+      <td mat-cell *matCellDef="let computer" class="d-flex tamanio">
+        <button mat-mini-fab color="warn" aria-label="Example icon button with a delete icon" class="m-2" (click)="deleteComputer(computer._id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        <a mat-mini-fab color="primary" aria-label="Example icon button with a edit icon" class="m-2" [routerLink]="['/edit',computer._id]">
+          <mat-icon>edit</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No se han Encontrados Datos</td>
+    </tr>
+
+  </table>
+  <mat-paginator [length]="100" [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5"  aria-label="Select page of computers"></mat-paginator>
+</div>

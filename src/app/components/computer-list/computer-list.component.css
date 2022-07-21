@@ -1,0 +1,21 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+th, td {
+  width: 15%;
+}
+
+/* .tamanio{
+  width: 10% !important;
+  text-align: center !important;
+}
+.tamanio2{
+  width: 20% !important;
+  text-align: center !important;
+} */
+

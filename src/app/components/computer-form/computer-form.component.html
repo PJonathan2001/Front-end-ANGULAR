@@ -1,0 +1,25 @@
+<form class="row g-3">
+  <div class="col-md-6">
+    <label for="procesador" class="form-label">Procesador</label>
+    <input type="text" name="procesador" [(ngModel)]="computer.procesador" class="form-control" id="procesador">
+  </div>
+  <div class="col-md-6">
+    <label for="pantalla" class="form-label">Pantalla</label>
+    <input type="text" name="pantalla" class="form-control" [(ngModel)]="computer.pantalla" id="pantalla">
+  </div>
+  <div class="col-12">
+    <label for="ram" class="form-label">Ram</label>
+    <input type="text" name="ram" class="form-control" [(ngModel)]="computer.ram" id="ram" placeholder="1234 Main St">
+  </div>
+  <div class="col-12">
+    <label for="rom" class="form-label">Rom</label>
+    <input type="text" name="rom" class="form-control" [(ngModel)]="computer.rom" id="rom" placeholder="Apartment, studio, or floor">
+  </div>
+  <div class="col-md-6">
+    <label for="lanzamiento" class="form-label">Año Lanzamiento</label>
+    <input type="date" name="lanzamiento" [(ngModel)]="computer.anio_lanzamiento" class="form-control" id="lanzamiento">
+  </div>
+  <div class="col-12">
+    <button (click)="edit ? editComputer() : saveComputer()" class="btn btn-primary">Enviar</button>
+  </div>
+</form>
