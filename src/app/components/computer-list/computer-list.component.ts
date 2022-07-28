@@ -45,7 +45,7 @@ export class ComputerListComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
+  
   getComputers() {
     this.computerService.getComputers(this.pagination).subscribe(
       res => {
@@ -57,6 +57,10 @@ export class ComputerListComponent implements AfterViewInit {
       },
       err => console.log(err)
     );
+  }
+
+  ItemsChange(event: any){
+    this.getComputers();
   }
   deleteComputer(id: string) {
     this.computerService.deleteComputer(id).subscribe(

@@ -25,9 +25,9 @@
   </tbody>
 </table> -->
 
-<mat-form-field appearance="standard">
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="ID" #input>
+<mat-form-field appearance="fill">
+  <mat-label class="color">Filter</mat-label>
+  <input class=" border "  matInput (keyup)="applyFilter($event)" placeholder="ID" #input>
 </mat-form-field>
 
 <div class="mat-elevation-z8">
@@ -87,7 +87,7 @@
     <ul class="pagination">
       <li class="page-item"><button class="page-link" (click)="goPrevius()">Previous</button></li>
       <li class="page-item">
-            <select class="page-link" aria-label="Default select example" [(ngModel)] = "pagination.limit">
+            <select class="page-link" aria-label="Default select example" [(ngModel)] = "pagination.limit" (ngModelChange)="ItemsChange($event)">
               <option *ngFor="let limit of limits" [value]="limit" selected>{{limit}}</option>
             </select>
       </li>
