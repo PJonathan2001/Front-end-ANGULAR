@@ -17,6 +17,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSortModule} from '@angular/material/sort';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatSortModule
+    MatSortModule,
+    MatSelectModule
   ],
   providers: [ComputerService],
   bootstrap: [AppComponent]

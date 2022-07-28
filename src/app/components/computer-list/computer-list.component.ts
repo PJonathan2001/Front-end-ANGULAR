@@ -1,21 +1,33 @@
 import { Component,AfterViewInit, ViewChild } from '@angular/core';
 import { ComputerService } from 'src/app/services/computer.service';
-import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { IComputer } from 'src/app/models/IComputer';
 
+export interface IPagination {
+  page: number;
+  limit: number;
+  totalPages: number;
+}
 @Component({
   selector: 'app-computer-list',
   templateUrl: './computer-list.component.html',
   styleUrls: ['./computer-list.component.css']
 })
 export class ComputerListComponent implements AfterViewInit {
-  computers:IComputer[] = [];
-  displayedColumns: string[] = ['numerador','_id', 'procesador', 'pantalla', 'ram', 'rom', 'anio_lanzamiento', 'acciones'];
-  dataSource: any = new MatTableDataSource([]);
+  limits = [5, 10, 25, 100];
+  pagination:IPagination = {
+    page: 1,
+    limit: 5,
+    totalPages: 2
+  }
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  computers:IComputer[] = [];
+  displayedColumns: string[] = ['_id', 'procesador', 'pantalla', 'ram', 'rom', 'anio_lanzamiento', 'acciones'];
+
+
+
+  dataSource: any = new MatTableDataSource([]);
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private computerService: ComputerService) {
@@ -23,7 +35,6 @@ export class ComputerListComponent implements AfterViewInit {
    }
 
    ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
@@ -36,10 +47,13 @@ export class ComputerListComponent implements AfterViewInit {
   }
 
   getComputers() {
-    this.computerService.getComputers().subscribe(
+    this.computerService.getComputers(this.pagination).subscribe(
       res => {
-        this.computers = res.content;
+        this.computers = res.content.docs;
         this.dataSource.data = this.computers;
+        this.pagination.totalPages = res.content.totalPages;
+        this.pagination.page = res.content.page;
+        this.pagination.limit = res.content.limit;
       },
       err => console.log(err)
     );
@@ -51,5 +65,13 @@ export class ComputerListComponent implements AfterViewInit {
         this.getComputers();
       }
     );
+  }
+  goNext(){
+    this.pagination.page++;
+    this.getComputers();
+  }
+  goPrevius(){
+    this.pagination.page--;
+    this.getComputers();
   }
 }

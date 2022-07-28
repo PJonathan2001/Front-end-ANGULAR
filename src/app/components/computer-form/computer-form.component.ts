@@ -22,16 +22,7 @@ export class ComputerFormComponent implements OnInit {
   }
   edit: boolean = false;
   computers : number;
-  getComputers() {
-    this.computerService.getComputers().subscribe(
-      res => {
-        this.computers = res.content.length;
-      },
-      err => console.log(err)
-    );
-  }
   ngOnInit(): void {
-    this.getComputers();
     const params = this.route.snapshot.params;
     if (params["id"]) {
       this.computerService.getComputer(params["id"]).subscribe(

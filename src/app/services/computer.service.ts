@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IComputer } from '../models/IComputer';
 import { IResponse } from '../models/response.model';
+import { IPagination } from '../components/computer-list/computer-list.component';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class ComputerService {
   constructor(private http: HttpClient){
 
   }
-  getComputers() : Observable<IResponse> {
-    return this.http.get<IResponse>('http://localhost:3000/computers');
+  getComputers(pagination:IPagination) : Observable<IResponse> {
+    return this.http.get<IResponse>('http://localhost:3000/computers?page=' + pagination.page + '&limit=' + pagination.limit);
   }
   getComputer(id: string) : Observable<IResponse> {
     return this.http.get<IResponse>('http://localhost:3000/computers/' + id);
